@@ -1,15 +1,30 @@
-# Go To-Do List API
+## How it works
 
-Простой REST API для управления списком задач, написанный на Go.
+После запуска сервера он будет доступен на `http://localhost:8080`.
 
-## Возможности
-- Получение списка задач (`GET /tasks`)
-- Получение задачи по ID (`GET /tasks/{id}`)
-- Создание задачи (`POST /tasks`)
-- Полное обновление задачи (`PUT /tasks/{id}`)
-- Частичное обновление задачи (`PATCH /tasks/{id}`)
-- Удаление задачи (`DELETE /tasks/{id}`)
+### Проверка с помощью curl
 
-## Запуск
-```bash
-go run main.go
+Получить список задач:
+curl http://localhost:8080/tasks
+
+Создать новую задачу:
+curl -X POST -d '{"title":"New Task","done":false}' \
+-H "Content-Type: application/json" \
+http://localhost:8080/tasks
+
+Получить задачу по ID:
+curl http://localhost:8080/tasks/1
+
+Обновить задачу (PUT):
+curl -X PUT -d '{"title":"Updated Task","done":true}' \
+-H "Content-Type: application/json" \
+http://localhost:8080/tasks/1
+
+Частично обновить задачу (PATCH):
+curl -X PATCH -d '{"done":true}' \
+-H "Content-Type: application/json" \
+http://localhost:8080/tasks/1
+
+Удалить задачу:
+curl -X DELETE http://localhost:8080/tasks/1
+
